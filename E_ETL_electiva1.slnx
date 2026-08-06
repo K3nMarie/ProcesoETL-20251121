@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="E_ETL_electiva1.api/E_ETL_electiva1.api.csproj" Id="ba0da56f-7fae-4108-9b54-28c8e8314023" />
+  <Project Path="E_ETL_electiva1.Data/E_ETL_electiva1.Data.csproj" Id="e322d912-6974-4b47-994b-1741ce4e0957" />
+  <Project Path="E_ETL_electiva1.Entities/E_ETL_electiva1.Entities.csproj" Id="62857fd6-3a61-4fd6-a18b-50913ad2ebb7" />
+  <Project Path="E_ETL_electiva1.Process/E_ETL_electiva1.Process.csproj" Id="f1d8e820-074a-43de-a6c3-0d5f8c91c01f" />
+</Solution>
