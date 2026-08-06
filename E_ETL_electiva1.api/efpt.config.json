@@ -1,0 +1,118 @@
+﻿{
+   "CodeGenerationMode": 6,
+   "ContextClassName": "opiniones_de_clientesDBContext",
+   "ContextNamespace": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "IrregularWords": null,
+   "MinimumProductVersion": "2.6.1604",
+   "ModelNamespace": null,
+   "OutputContextPath": "context",
+   "OutputPath": "Models",
+   "PluralRules": null,
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "E_ETL_electiva1.api",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "SingularRules": null,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[Categorias]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Clientes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Fuente_Datos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Opiniones]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Productos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Redes_Sociales]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Tipos_Fuente]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[sp_etl_insert_opinion_sinRed]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[sp_etl_insert_opinion]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[sp_etl_upsert_categoria]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[sp_etl_upsert_cliente_IdOnly]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[sp_etl_upsert_cliente]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[sp_etl_upsert_fuente_dato]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[sp_etl_upsert_producto_IdProducto]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[sp_etl_upsert_producto]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[sp_etl_upsert_red_social]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[sp_etl_upsert_tipo_fuente]",
+         "ObjectType": 1
+      }
+   ],
+   "UiHint": null,
+   "UncountableWords": null,
+   "UseAsyncStoredProcedureCalls": true,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDatabaseNamesForRoutines": true,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseInternalAccessModifiersForSprocsAndFunctions": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": true,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": true,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false,
+   "UseT4Split": false,
+   "UseTypedTvpParameters": true
+}

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-E_ETL_electiva1.Process-ce2af1dd-9423-4120-9b0b-a07db232dd08</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\E_ETL_electiva1.Data\E_ETL_electiva1.Data.csproj" />
+    <ProjectReference Include="..\E_ETL_electiva1.Entities\E_ETL_electiva1.Entities.csproj" />
+  </ItemGroup>
+</Project>
