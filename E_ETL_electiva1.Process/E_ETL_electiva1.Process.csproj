@@ -9,10 +9,19 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.6" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\E_ETL_electiva1.Data\E_ETL_electiva1.Data.csproj" />
     <ProjectReference Include="..\E_ETL_electiva1.Entities\E_ETL_electiva1.Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- El CSV de encuestas vive físicamente en E_ETL_electiva1.Data; se enlaza aquí para que
+         quede disponible junto al ejecutable del Worker (ver Etl:CsvPath en appsettings.json). -->
+    <Content Include="..\E_ETL_electiva1.Data\Csv\surveys_part1.csv" Link="Csv\surveys_part1.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>

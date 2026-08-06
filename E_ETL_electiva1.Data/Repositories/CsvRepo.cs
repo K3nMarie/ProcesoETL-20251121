@@ -5,7 +5,7 @@ using E_ETL_electiva1.Entities.Models.csv;
 using E_ETL_electiva1.Entities.interfaces;
 namespace E_ETL_electiva1.Data.Repositories
 {
-    internal class CsvRepo : ICsvRepository
+    public class CsvRepo : ICsvRepository
     {
 
         private readonly string _filePath;

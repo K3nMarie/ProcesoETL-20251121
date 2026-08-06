@@ -1,4 +1,4 @@
-﻿{
+{
    "CodeGenerationMode": 6,
    "ContextClassName": "AnaliticalDbElectiva1Context",
    "ContextNamespace": null,
@@ -19,15 +19,7 @@
    "T4TemplatePath": null,
    "Tables": [
       {
-         "Name": "[dbo].[Clientes]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[Fuentes]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[Opiniones]",
+         "Name": "[dbo].[Categorias_Producto]",
          "ObjectType": 0
       },
       {
@@ -35,19 +27,19 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[Redes_Sociales]",
+         "Name": "[dbo].[Clientes]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[sp_upsert_cliente]",
-         "ObjectType": 1
+         "Name": "[dbo].[Canales_Origen]",
+         "ObjectType": 0
       },
       {
-         "Name": "[dbo].[sp_upsert_fuente]",
-         "ObjectType": 1
+         "Name": "[dbo].[Opiniones_Clientes]",
+         "ObjectType": 0
       },
       {
-         "Name": "[dbo].[sp_upsert_opinion]",
+         "Name": "[dbo].[sp_upsert_categoria]",
          "ObjectType": 1
       },
       {
@@ -55,7 +47,19 @@
          "ObjectType": 1
       },
       {
-         "Name": "[dbo].[sp_upsert_red_social]",
+         "Name": "[dbo].[sp_upsert_canal]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[sp_upsert_cliente]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[sp_upsert_opinion]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[sp_insert_opinion_sin_canal]",
          "ObjectType": 1
       }
    ],
