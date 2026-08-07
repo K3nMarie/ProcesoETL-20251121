@@ -49,4 +49,33 @@ builder.Services.AddScoped<IApiService, apiService>();
 builder.Services.AddHostedService<Worker>();
 
 var host = builder.Build();
-host.Run();
+
+try
+{
+    Console.WriteLine("=== Proceso ETL: Opiniones de Clientes ===");
+    Console.WriteLine($"CSV: {csvFullPath}");
+    Console.WriteLine($"BD transaccional: {connStringTrans}");
+    Console.WriteLine($"BD analítica:     {connStringAnalitica}");
+    Console.WriteLine("-------------------------------------------");
+
+    await host.RunAsync();
+
+    Console.WriteLine("-------------------------------------------");
+    Console.WriteLine("Proceso finalizado. Revisa los mensajes anteriores para ver qué se cargó.");
+}
+catch (Exception ex)
+{
+    Console.WriteLine("-------------------------------------------");
+    Console.WriteLine("El proceso terminó con un error antes de completar la carga:");
+    Console.WriteLine(ex);
+}
+finally
+{
+    // Evita que la ventana se cierre sola al terminar (p. ej. al ejecutar el .exe con doble clic).
+    if (Environment.UserInteractive)
+    {
+        Console.WriteLine();
+        Console.WriteLine("Presiona una tecla para cerrar...");
+        Console.ReadKey();
+    }
+}
