@@ -10,4 +10,8 @@
     <Folder Include="Models\api\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\E_ETL_electiva1.api\E_ETL_electiva1.api.csproj" />
+  </ItemGroup>
+
 </Project>

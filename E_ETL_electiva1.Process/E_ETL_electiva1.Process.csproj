@@ -9,12 +9,14 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.10" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.10" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\E_ETL_electiva1.Data\E_ETL_electiva1.Data.csproj" />
     <ProjectReference Include="..\E_ETL_electiva1.Entities\E_ETL_electiva1.Entities.csproj" />
+    <ProjectReference Include="..\E_ETL_electiva1.api\E_ETL_electiva1.api.csproj" />
   </ItemGroup>
 
   <ItemGroup>
