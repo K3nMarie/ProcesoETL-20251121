@@ -26,8 +26,8 @@ namespace E_ETL_electiva1.Process.services
 
             foreach (var cliente in clientes)
             {
-                if (string.IsNullOrWhiteSpace(cliente.IdCliente)) continue;
-                await _resolver.UpsertClienteAsync(DimensionResolver.HomologarIdCliente(cliente.IdCliente));
+                if (cliente.IdCliente <= 0) continue;
+                await _resolver.UpsertClienteAsync(DimensionResolver.HomologarIdCliente(cliente.IdCliente.ToString()));
             }
 
             return true;

@@ -31,10 +31,13 @@ namespace E_ETL_electiva1.Process.services
 
         public Task<bool> upload_Productos()
         {
-            // El CSV solo trae el IdProducto de origen, sin Nombre ni Categoría, por lo que
-            // no puede originar una fila válida en Productos (Nombre/IdCategoria son NOT NULL
-            // y el id es IDENTITY en el DWH). Se asume que TransDbService/apiService ya
-            // cargaron el catálogo de productos antes de que corra esta fuente.
+            // El CSV solo trae el IdProducto de origen, sin Nombre ni Categoría. Ese
+            // IdProducto además NO es comparable con el IdProducto (IDENTITY) del DWH: son
+            // catálogos de origen distintos (en la muestra actual hay 383 IdProducto de CSV
+            // distintos, entre 3 y 997, sin relación con los pocos productos reales que cargan
+            // BD transaccional/API). Por eso no se intenta resolverlo contra esos productos
+            // reales aquí; upload_Opiniones crea, bajo demanda, un producto placeholder por
+            // cada IdProducto de CSV (ver DimensionResolver.UpsertProductoAsync).
             logger.LogInformation("CSV: se omite la carga de Productos (el archivo no trae Nombre/Categoría).");
             return Task.FromResult(true);
         }
@@ -55,6 +58,11 @@ namespace E_ETL_electiva1.Process.services
         public async Task<bool> upload_Opiniones()
         {
             var canalCache = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+            // encuesta.IdProducto es el id del catálogo de origen del CSV, no el IdProducto
+            // (IDENTITY) del DWH: son numeraciones independientes. Se resuelve/crea aquí un
+            // producto placeholder por cada IdProducto de CSV visto, para no violar la FK de
+            // Opiniones_Clientes -> Productos ni perder la trazabilidad por producto.
+            var productoCache = new Dictionary<int, int>();
             var cargadas = 0;
             var conError = 0;
 
@@ -71,9 +79,17 @@ namespace E_ETL_electiva1.Process.services
                         canalCache[encuesta.Fuente] = idCanal;
                     }
 
+                    if (!productoCache.TryGetValue(encuesta.IdProducto, out var idProducto))
+                    {
+                        idProducto = await _resolver.UpsertProductoAsync(
+                            $"CSV-{encuesta.IdProducto}",
+                            "Sin categoría (CSV)");
+                        productoCache[encuesta.IdProducto] = idProducto;
+                    }
+
                     await _procedures.sp_upsert_opinionAsync(
                         idOpinion: null,
-                        idProducto: encuesta.IdProducto,
+                        idProducto: idProducto,
                         idCliente: idCliente,
                         idCanal: idCanal,
                         fechaOpinion: encuesta.Fecha,

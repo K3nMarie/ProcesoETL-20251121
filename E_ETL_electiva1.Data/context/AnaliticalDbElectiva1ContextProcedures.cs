@@ -104,7 +104,7 @@ namespace E_ETL_electiva1.Data.context
             return result;
         }
 
-        public virtual async Task<int> sp_upsert_clienteAsync(string idCliente, OutputParameter<int>? returnValue = null, CancellationToken? cancellationToken = default)
+        public virtual async Task<int> sp_upsert_clienteAsync(string? idCliente, OutputParameter<int>? returnValue = null, CancellationToken? cancellationToken = default)
         {
             var parameterReturnValue = new SqlParameter
             {
@@ -115,7 +115,7 @@ namespace E_ETL_electiva1.Data.context
 
             var sqlParameters = new[]
             {
-                new SqlParameter { ParameterName = "IdCliente", Size = 6, Value = idCliente, SqlDbType = SqlDbType.VarChar },
+                new SqlParameter { ParameterName = "IdCliente", Size = 100, Value = (object?)idCliente ?? DBNull.Value, SqlDbType = SqlDbType.VarChar },
                 parameterReturnValue,
             };
 

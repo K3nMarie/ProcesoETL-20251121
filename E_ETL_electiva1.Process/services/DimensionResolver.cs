@@ -40,14 +40,30 @@ namespace E_ETL_electiva1.Process.services
                 .SingleAsync(ct);
         }
 
-        public async Task UpsertProductoAsync(string nombre, string nombreCategoria, CancellationToken ct = default)
+        public async Task<int> UpsertProductoAsync(string nombre, string nombreCategoria, CancellationToken ct = default)
         {
             var idCategoria = await UpsertCategoriaAsync(nombreCategoria, ct);
-            // Sin un id externo confiable (Productos.IdProducto es IDENTITY en el DWH), el
-            // upsert de producto solo puede deduplicar dentro de la misma corrida vía el
-            // caché de nombres de cada servicio; sp_upsert_producto siempre inserta cuando
-            // no se le pasa @IdProducto.
-            await _procedures.sp_upsert_productoAsync(null, nombre, idCategoria, cancellationToken: ct);
+
+            // sp_upsert_producto solo actualiza cuando recibe @IdProducto; si se le pasa NULL
+            // (como hacían antes todas las llamadas de este resolver) siempre inserta una fila
+            // nueva, sin comprobar si ya existe un producto con ese Nombre. Como Productos.Nombre
+            // no tiene restricción UNIQUE en el esquema, eso duplicaba el catálogo en cada corrida
+            // del proceso ETL. Se resuelve el id existente por Nombre desde este lado (EF) antes
+            // de decidir si insertar o actualizar, para que el upsert sea realmente idempotente.
+            var idExistente = await analitica.Productos
+                .Where(p => p.Nombre == nombre)
+                .Select(p => (int?)p.IdProducto)
+                .FirstOrDefaultAsync(ct);
+
+            await _procedures.sp_upsert_productoAsync(idExistente, nombre, idCategoria, cancellationToken: ct);
+
+            if (idExistente is int id) return id;
+
+            return await analitica.Productos
+                .Where(p => p.Nombre == nombre)
+                .OrderByDescending(p => p.IdProducto)
+                .Select(p => p.IdProducto)
+                .FirstAsync(ct);
         }
 
         /// <summary>

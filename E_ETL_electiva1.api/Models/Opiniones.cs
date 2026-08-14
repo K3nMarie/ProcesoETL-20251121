@@ -9,25 +9,19 @@ public partial class Opiniones
 {
     public int IdOpinion { get; set; }
 
-    public string? IdCliente { get; set; }
-
-    public string IdProducto { get; set; } = null!;
-
-    public int? IdRedSocial { get; set; }
-
-    public DateOnly Fecha { get; set; }
-
-    public string? Comentario { get; set; }
+    public DateTime? Fecha { get; set; }
 
     public string? Clasificacion { get; set; }
 
-    public byte? PuntajeSatisfaccion { get; set; }
-
     public string? Fuente { get; set; }
+
+    // IdCliente/IdProducto son INT en la BD (Clientes/Productos son INT IDENTITY);
+    // antes se declaraban como string por error, lo que rompía las lecturas por EF Core.
+    public int? IdCliente { get; set; }
+
+    public int? IdProducto { get; set; }
 
     public virtual Clientes? IdClienteNavigation { get; set; }
 
-    public virtual Productos IdProductoNavigation { get; set; } = null!;
-
-    public virtual Redes_Sociales? IdRedSocialNavigation { get; set; }
+    public virtual Productos? IdProductoNavigation { get; set; }
 }

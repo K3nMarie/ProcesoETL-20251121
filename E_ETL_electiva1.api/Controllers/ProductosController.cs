@@ -30,7 +30,7 @@ namespace E_ETL_electiva1.api.Controllers
 
         // GET: api/Productos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Productos>> GetProductos(string id)
+        public async Task<ActionResult<Productos>> GetProductos(int id)
         {
             var productos = await _context.Productos.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace E_ETL_electiva1.api.Controllers
         // PUT: api/Productos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProductos(string id, Productos productos)
+        public async Task<IActionResult> PutProductos(int id, Productos productos)
         {
             if (id != productos.IdProducto)
             {
@@ -100,7 +100,7 @@ namespace E_ETL_electiva1.api.Controllers
 
         // DELETE: api/Productos/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProductos(string id)
+        public async Task<IActionResult> DeleteProductos(int id)
         {
             var productos = await _context.Productos.FindAsync(id);
             if (productos == null)
@@ -114,7 +114,7 @@ namespace E_ETL_electiva1.api.Controllers
             return NoContent();
         }
 
-        private bool ProductosExists(string id)
+        private bool ProductosExists(int id)
         {
             return _context.Productos.Any(e => e.IdProducto == id);
         }

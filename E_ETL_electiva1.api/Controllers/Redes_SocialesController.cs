@@ -21,6 +21,7 @@ namespace E_ETL_electiva1.api.Controllers
             _context = context;
         }
 
+        /*
         // GET: api/Redes_Sociales
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Redes_Sociales>>> GetRedes_Sociales()
@@ -103,6 +104,7 @@ namespace E_ETL_electiva1.api.Controllers
         private bool Redes_SocialesExists(int id)
         {
             return _context.Redes_Sociales.Any(e => e.IdRedSocial == id);
-        }
+        } */
     }
+
 }

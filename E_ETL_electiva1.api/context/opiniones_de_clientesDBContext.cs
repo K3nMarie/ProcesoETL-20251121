@@ -23,8 +23,6 @@ public partial class opiniones_de_clientesDBContext : DbContext
 
     public virtual DbSet<Productos> Productos { get; set; }
 
-    public virtual DbSet<Redes_Sociales> Redes_Sociales { get; set; }
-
     public virtual DbSet<Tipos_Fuente> Tipos_Fuente { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -44,15 +42,14 @@ public partial class opiniones_de_clientesDBContext : DbContext
 
             entity.ToTable(tb => tb.HasTrigger("trg_clientes_delete"));
 
-            entity.Property(e => e.IdCliente)
-                .HasMaxLength(6)
-                .IsUnicode(false);
             entity.Property(e => e.Email)
                 .HasMaxLength(254)
-                .IsUnicode(false);
+                .IsUnicode(false)
+                .IsRequired();
             entity.Property(e => e.Nombre)
                 .HasMaxLength(150)
-                .IsUnicode(false);
+                .IsUnicode(false)
+                .IsRequired();
         });
 
         modelBuilder.Entity<Fuente_Datos>(entity =>
@@ -78,18 +75,12 @@ public partial class opiniones_de_clientesDBContext : DbContext
 
             entity.HasIndex(e => e.IdProducto, "idx_op_producto");
 
-            entity.HasIndex(e => e.IdRedSocial, "idx_op_red");
-
             entity.Property(e => e.Clasificacion)
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.Fuente)
                 .HasMaxLength(20)
                 .IsUnicode(false);
-            entity.Property(e => e.IdCliente)
-                .HasMaxLength(6)
-                .IsUnicode(false);
-            entity.Property(e => e.IdProducto).HasMaxLength(6);
 
             entity.HasOne(d => d.IdClienteNavigation).WithMany(p => p.Opiniones)
                 .HasForeignKey(d => d.IdCliente)
@@ -99,10 +90,6 @@ public partial class opiniones_de_clientesDBContext : DbContext
                 .HasForeignKey(d => d.IdProducto)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_op_producto");
-
-            entity.HasOne(d => d.IdRedSocialNavigation).WithMany(p => p.Opiniones)
-                .HasForeignKey(d => d.IdRedSocial)
-                .HasConstraintName("fk_op_red_social");
         });
 
         modelBuilder.Entity<Productos>(entity =>
@@ -111,7 +98,6 @@ public partial class opiniones_de_clientesDBContext : DbContext
 
             entity.HasIndex(e => e.IdCategoria, "idx_prod_cat");
 
-            entity.Property(e => e.IdProducto).HasMaxLength(6);
             entity.Property(e => e.Nombre)
                 .HasMaxLength(150)
                 .IsUnicode(false);
@@ -120,19 +106,6 @@ public partial class opiniones_de_clientesDBContext : DbContext
                 .HasForeignKey(d => d.IdCategoria)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("fk_prod_cat");
-        });
-
-        modelBuilder.Entity<Redes_Sociales>(entity =>
-        {
-            entity.HasKey(e => e.IdRedSocial).HasName("PK__Redes_So__FCCC5114D9600208");
-
-            entity.ToTable(tb => tb.HasTrigger("trg_redes_sociales_delete"));
-
-            entity.HasIndex(e => e.NombreRedSocial, "UQ__Redes_So__37FD7CC8D4F1A467").IsUnique();
-
-            entity.Property(e => e.NombreRedSocial)
-                .HasMaxLength(100)
-                .IsUnicode(false);
         });
 
         modelBuilder.Entity<Tipos_Fuente>(entity =>

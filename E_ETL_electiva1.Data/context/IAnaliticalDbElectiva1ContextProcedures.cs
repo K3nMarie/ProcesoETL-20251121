@@ -15,8 +15,7 @@ namespace E_ETL_electiva1.Data.context
 
         Task<int> sp_upsert_canalAsync(string nombreCanal, OutputParameter<int>? returnValue = null, CancellationToken? cancellationToken = default);
 
-        Task<int> sp_upsert_clienteAsync(string idCliente, OutputParameter<int>? returnValue = null, CancellationToken? cancellationToken = default);
-
+        Task<int> sp_upsert_clienteAsync(string? idCliente, OutputParameter<int>? returnValue = null, CancellationToken? cancellationToken = default);
         Task<int> sp_upsert_opinionAsync(int? idOpinion, int idProducto, string? idCliente, int? idCanal, System.DateOnly fechaOpinion, byte puntajeSatisfaccion, OutputParameter<int>? returnValue = null, CancellationToken? cancellationToken = default);
 
         Task<int> sp_insert_opinion_sin_canalAsync(int idProducto, string? idCliente, System.DateOnly fechaOpinion, byte puntajeSatisfaccion, OutputParameter<int>? returnValue = null, CancellationToken? cancellationToken = default);

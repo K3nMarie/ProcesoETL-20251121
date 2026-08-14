@@ -5,6 +5,5 @@
         public Task<bool> upload_Clientes();
         public Task<bool> upload_Productos();
         public Task<bool> upload_Fuentes();
-        public Task<bool> upload_Redes();
     }
 }

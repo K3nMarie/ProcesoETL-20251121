@@ -33,7 +33,6 @@ namespace E_ETL_electiva1.Process
                     await apiService.upload_Clientes();
                     await apiService.upload_Productos();
                     await apiService.upload_Fuentes();
-                    await apiService.upload_Redes();
                 }, logger);
 
                 await EjecutarFuente("CSV", async () =>

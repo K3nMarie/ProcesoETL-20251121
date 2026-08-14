@@ -44,14 +44,5 @@ namespace E_ETL_electiva1.Data.Repositories
             // "API REST" de forma fija, igual que hacía la plantilla original.
             return "Social Comments";
         }
-
-        public async Task<IEnumerable<Redes_Sociales>> GetRedesSociales()
-        {
-            var respuesta = await _httpClient.GetAsync("api/Redes_Sociales");
-            respuesta.EnsureSuccessStatusCode();
-            var json = await respuesta.Content.ReadAsStringAsync();
-
-            return JsonSerializer.Deserialize<List<Redes_Sociales>>(json, JsonOptions) ?? [];
-        }
     }
 }
